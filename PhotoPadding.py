@@ -6,7 +6,7 @@ import sys,os
 def pic(photo_import, photo_export):
     size_6 = 6
     size_4 = 4
-
+    print(photo_import)
     image = Image.open(photo_import)
     original_size = image.size # (width -, height |)
 
@@ -56,7 +56,7 @@ def pic(photo_import, photo_export):
 
     print("new size ", new_size)
 
-    padded_image = Image.new("RGB", new_size, (255,255,255))
+    padded_image = Image.new("RGB", new_size, (255,255,255)) # White padding, can change to black (0,0,0) or any other color that is prefered
 
     img = np.asarray(padded_image)
     new_img=img.copy()
@@ -72,4 +72,9 @@ def pic(photo_import, photo_export):
     padded_image = Image.fromarray(new_img, 'RGB')
     padded_image.save(photo_export)
 
-pic("Hep.JPG", "out.png")
+
+photos = os.listdir("Photos")
+for photo in photos:
+    path_in = "Photos/" + photo
+    path_out = "Edited/" + photo
+    pic(path_in, path_out)

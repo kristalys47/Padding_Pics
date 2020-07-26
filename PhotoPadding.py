@@ -68,7 +68,7 @@ def pic(photo_import, photo_export):
 photos = os.listdir("Photos")
 count = len(photos)
 n_file = ".DS_Store"
-
+photos.sort()
 for photo in photos:
     if photo == n_file:
         continue

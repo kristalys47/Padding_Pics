@@ -9,11 +9,6 @@ def pic(photo_import, photo_export):
     print(photo_import)
     image = Image.open(photo_import)
     original_size = image.size # (width -, height |)
-
-
-    print(image.mode)
-
-    print("original size", original_size)
     padded_image = None
     new_size = None
 
@@ -26,12 +21,10 @@ def pic(photo_import, photo_export):
 
         if proportions4 <= original_size[1]:
             # heigth is the norm
-            print("1entra1")
             new_size = (proportions6, original_size[1])
             # padding side
         else:
             # weigth is the norm
-            print("1entra2")
             new_size = (original_size[0], proportions4)
             # padding down
 
@@ -44,12 +37,10 @@ def pic(photo_import, photo_export):
 
         if proportions4 <= original_size[0]:
             # weight is the norm
-            print("2entra1")
             new_size = (original_size[0],proportions6)
             # padding down
         else:
             # heigth is the norm
-            print("2entra2")
             new_size = (proportions4, original_size[1])
             # padding side
 
@@ -71,10 +62,18 @@ def pic(photo_import, photo_export):
 
     padded_image = Image.fromarray(new_img, 'RGB')
     padded_image.save(photo_export)
+    print("Done")
 
 
 photos = os.listdir("Photos")
+count = len(photos)
+n_file = ".DS_Store"
+
 for photo in photos:
+    if photo == n_file:
+        continue
+    print("Start # ", count)
     path_in = "Photos/" + photo
     path_out = "Edited/" + photo
     pic(path_in, path_out)
+    count -= 1
